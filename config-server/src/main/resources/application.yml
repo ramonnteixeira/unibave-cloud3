@@ -12,7 +12,9 @@ spring:
     config:
       server:
         git:
-            uri: https://github.com/ramonnteixeira/unibave-config-repo
+            uri: https://github.com/ramonnteixeira/unibave-cloud3
+            searchPaths: config-repo
+            
   rabbitmq:
     host: localhost
     port: 5672    

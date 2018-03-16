@@ -7,4 +7,4 @@ info:
 logging:
   level: debug
 
-spring.jackson.serialization.write-dates-as-timestamps=false
+spring.jackson.serialization.write-dates-as-timestamps: false

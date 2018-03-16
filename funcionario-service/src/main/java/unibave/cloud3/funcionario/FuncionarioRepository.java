@@ -1,9 +1,9 @@
 package unibave.cloud3.funcionario;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+import org.springframework.stereotype.Repository;
 
-@RepositoryRestResource(path = "/funcionarios", collectionResourceRel = "funcionarios")
+@Repository
 public interface FuncionarioRepository extends JpaRepository<Funcionario, Long> {
 	
 }

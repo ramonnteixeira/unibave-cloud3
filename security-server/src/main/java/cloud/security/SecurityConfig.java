@@ -8,29 +8,29 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
-@Configuration
+//@Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-	@Bean
+    @Bean
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
-	
-	@Autowired
-	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("barry").password("t0ps3cr3t").roles("USER").and()
-			.withUser("larry").password("t0ps3cr3t").roles("USER", "MANAGER").and()
-			.withUser("root").password("t0ps3cr3t").roles("USER", "MANAGER", "ADMIN");
-	}
-	
-	@Override
-	public void configure(HttpSecurity http) throws Exception {
+
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.inMemoryAuthentication()
+                .withUser("barry").password("t0ps3cr3t").roles("USER").and()
+                .withUser("larry").password("t0ps3cr3t").roles("USER", "MANAGER").and()
+                .withUser("root").password("t0ps3cr3t").roles("USER", "MANAGER", "ADMIN");
+    }
+
+    @Override
+    public void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-        	.requestMatchers().antMatchers("/login", "/oauth/authorize").and()
-        		.authorizeRequests().anyRequest().authenticated().and()
-        		.formLogin().permitAll();
-	}		
+                .requestMatchers().antMatchers("/login", "/oauth/authorize").and()
+                .authorizeRequests().anyRequest().authenticated().and()
+                .formLogin().permitAll();
+    }
 
 }

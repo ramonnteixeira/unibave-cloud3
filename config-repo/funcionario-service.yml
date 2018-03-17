@@ -8,13 +8,6 @@ eureka:
   instance:
     preferIpAddress: true
 
-feign:
-  compression:
-    request:
-      enabled: true
-    response:
-      enabled: true  
-
 security:
   sessions: stateless
   basic:

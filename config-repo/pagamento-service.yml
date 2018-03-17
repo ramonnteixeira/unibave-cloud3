@@ -17,4 +17,19 @@ feign:
   hystrix:
     enabled: true
 
+hystrix:
+  command:
+    FuncionarioClient#getFuncionarios():
+      execution:
+        isolation:
+          strategy: SEMAPHORE
+          semaphore:
+            maxConcurrentRequests: 5
+      fallback:
+        isolation:
+          semaphore:
+            maxConcurrentRequests: 5
+      circuitBreaker:
+        requestVolumeThreshold: 5
+
 app.percentual_desconto: 0.11

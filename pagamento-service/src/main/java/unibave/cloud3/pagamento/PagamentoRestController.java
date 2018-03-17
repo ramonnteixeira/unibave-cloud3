@@ -5,19 +5,16 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/pagamentos")
-public class PagamentoRestController {
+class PagamentoRestController {
 
     @Autowired
     DiscoveryClient discoveryClient;
@@ -29,20 +26,18 @@ public class PagamentoRestController {
     Double percentualDesconto;
 
     Random rand = new Random(300);
-
+    
     @Autowired
-    RestTemplate restTemplate;
+    FuncionarioClient funcionarioClient;
 
     /**
      * Busca funcionários e calcula o pagamento para os funcionarios ativos (sem
      * demissao assinada)
      */
     @GetMapping
-    public List<PagamentoDTO> calcularPagamentos() throws Exception {
-        ResponseEntity<FuncionarioDTO[]> funcionarios = restTemplate
-                .getForEntity("http://funcionario-service/funcionarios", FuncionarioDTO[].class);
-
-        return Stream.of(funcionarios.getBody())
+    List<PagamentoDTO> calcularPagamentos() throws Exception {
+        return funcionarioClient.getFuncionarios()
+                .stream()
                 .filter(e -> e.getDemissao() == null)
                 .map(
                         e -> PagamentoDTO.builder()

@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter(AccessLevel.PROTECTED)
 @Builder
-public class PagamentoDTO {
+class PagamentoDTO {
 
     private FuncionarioDTO funcionario;
     private BigDecimal salarioBruto;
@@ -17,7 +17,7 @@ public class PagamentoDTO {
     private BigDecimal descontos;
     private BigDecimal salarioLiquido;
 
-    protected PagamentoDTO salarioLiquido() {
+    PagamentoDTO salarioLiquido() {
         salarioLiquido = salarioBruto.add(acrescimos).subtract(descontos);
         return this;
     }

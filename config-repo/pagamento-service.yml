@@ -8,4 +8,13 @@ eureka:
   instance:
     preferIpAddress: true
 
+feign:
+  compression:
+    request:
+      enabled: true
+    response:
+      enabled: true  
+  hystrix:
+    enabled: true
+
 app.percentual_desconto: 0.11
